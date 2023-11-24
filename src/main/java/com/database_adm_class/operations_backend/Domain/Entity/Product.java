@@ -38,16 +38,16 @@ public class Product {
   }
 
   public void update(DataUpdateProduct dataUpdateProduct) {
-    if (dataUpdateProduct.name() != null) {
+    if (dataUpdateProduct.name() != null && dataUpdateProduct.name().length() > 0) {
       this.name = dataUpdateProduct.name();
     }
     if (dataUpdateProduct.price() != null) {
       this.price = dataUpdateProduct.price();
     }
-    if (dataUpdateProduct.description() != null) {
+    if (dataUpdateProduct.description() != null && dataUpdateProduct.name().length() > 0) {
       this.description = dataUpdateProduct.description();
     }
-    if ( dataUpdateProduct.name() != null && dataUpdateProduct.price() != null && dataUpdateProduct.description() != null) {
+    if ( dataUpdateProduct.name() == null && dataUpdateProduct.price() == null && dataUpdateProduct.description() == null) {
       throw new IllegalStateException("At least one of the filed must be provided.");
     }
   }
