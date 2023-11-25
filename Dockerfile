@@ -1,11 +1,13 @@
-FROM maven:3.8.1-openjdk-17-slim AS build
-COPY /src /app/src
-COPY /pom.xml /app
-RUN mvn -f /app/pom.xml clean package -D maven.test.skip=true
-
-
-FROM openjdk:17-slim
+FROM maven:3.8.1-openjdk-17 AS build
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+COPY pom.xml /app/pom.xml
+COPY mvnw /app/mvnw
+COPY .mvn /app/.mvn
+COPY src /app/src
+RUN mvn clean package -D skipTests
+
+FROM openjdk:17-alpine
+WORKDIR /app
 EXPOSE 8000
+COPY --from=build /app/target/operations_backend-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

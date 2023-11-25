@@ -1,7 +1,6 @@
 package com.database_adm_class.operations_backend.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.database_adm_class.operations_backend.Domain.DTO.DataRegisterProduct;
 import com.database_adm_class.operations_backend.Domain.DTO.DataUpdateProduct;
 import com.database_adm_class.operations_backend.Domain.Entity.Product;
-import com.database_adm_class.operations_backend.Repository.ProductMariaRepository;
+
+import com.database_adm_class.operations_backend.Repository.MongoDB.ProductMongoRepository;
+import com.database_adm_class.operations_backend.Repository.MariaDB.ProductMariaRepository;
 
 @Service
 public class ProductService {
@@ -22,7 +23,7 @@ public class ProductService {
   }
 
   public Product register(DataRegisterProduct requestProduct) {
-    var product = new Product(requestProduct);
+    Product product = new Product(requestProduct);
     return repository.save(product);
   }
 

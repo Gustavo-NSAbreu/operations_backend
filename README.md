@@ -29,26 +29,23 @@ Open a browser and type
 
 #### Runnig Databases
 First thing is to run the databases the backend depend on.
-Pull the MariaDB and MongoDB images and create the volumes for each of them.
+If you don't have a docker-compose.yaml with the databases already configured then
+pull the MariaDB and MongoDB images and create the volumes for each of them.
 Then run their containers with this configuration
 
 ```bash
 # 1. MariaDB
-docker run -d --name mariadb -v mariadb-databases --network phpmyadmin-network -e "MYSQL_ROOT_PASSWORD=suasenha" mariadb
+docker run -d --name mariadb -v mariadb-databases -p  --network phpmyadmin-network -e "MYSQL_ROOT_PASSWORD=suasenha" mariadb
 
 # 2. MongoDB
 
 
 ```
 
-First build the .jar file with the command
-
-`mvn clean package`
-
 Then, on the root directory, build the aplication image with the command
 
-`docker build <name_of_the_image> .`
+`docker build -t <name_of_the_image> .`
 
 After the image is built run the container with the command
 
-`docker run -p 8888 <name_of_the_image>`
+`docker run -p 8000:8000 <name_of_the_image> --network database_adm_final_project_default <name_of_the_container>`

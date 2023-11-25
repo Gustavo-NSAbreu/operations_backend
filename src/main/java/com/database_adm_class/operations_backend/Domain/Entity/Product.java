@@ -1,6 +1,6 @@
 package com.database_adm_class.operations_backend.Domain.Entity;
 
-import java.sql.Date;
+// import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.database_adm_class.operations_backend.Domain.DTO.DataRegisterProduct;
 import com.database_adm_class.operations_backend.Domain.DTO.DataUpdateProduct;
@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// @Document(collection = "product")
 @Table(name = "product")
 @Entity(name = "product")
 @Getter
